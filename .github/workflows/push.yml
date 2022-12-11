@@ -4,15 +4,18 @@ on:
     branches:
       - main
 jobs:
-  aqua:
-    name: trivy
+  build:
+    name: build
     runs-on: macOS-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: build cocoapods
         run: pod install
-
+  trivy:
+    name: trivy
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Trivy vulnerability scanner in IaC mode
         uses: aquasecurity/trivy-action@master
         with:
